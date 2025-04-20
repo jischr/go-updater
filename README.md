@@ -141,3 +141,4 @@ You can also specify
 3. **CRON**: Use a library for managing a cron job for the updates (rather than this sleep timer)
 4. **Forced Updates**: Allow admins to force an update check
 5. **Metrics and Monitoring**: Add Prometheus metrics for monitoring update status.
+6. **More Tests**: I only had time for happy path tests. I'd add negative tests.
