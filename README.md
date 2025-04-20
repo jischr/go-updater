@@ -55,16 +55,15 @@ The system consists of several components:
 
 ### Configuration
 
-The program can be configured in the config/config.go file
-(if it was a production app, you could configure using environment variables or a configuration file :smile:)
+The program can be configured in the config/config.go file. If this was a production app, it using environment variables or a configuration file instead.
 
 To configure the program that is executed:
-- github owner: GitHub repository owner
-- github repo: GitHub repository name
+- Github Owner: GitHub repository owner
+- Github Repo: GitHub repository name
 
 You can also specify
-- check internval: Interval between update checks (30 seconds because we don't want to wait around forever in an interview)
-- proxy port: : Port for the reverse proxy (default: 8080)
+- Check Internval: Interval between update checks (30 seconds because we don't want to wait around forever in an interview)
+- Proxy Port: : Port for the reverse proxy (default: 8080)
 
 ## How It Works
 
