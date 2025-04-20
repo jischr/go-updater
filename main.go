@@ -25,16 +25,11 @@ func main() {
 
 	config := config.DefaultConfig()
 
-	// Create a shared pointer to the active instance
-	var activeInstance *models.BinaryInstance
-
-	updateService := service.NewUpdateService(config, clients.NewGitHubClient(config), &mux, activeInstance)
+	updateService := service.NewUpdateService(config, clients.NewGitHubClient(config), &mux)
 
 	// Pass a function that gets the current active instance
 	go startReverseProxy(config.ProxyPort, func() *models.BinaryInstance {
-		mux.RLock()
-		defer mux.RUnlock()
-		return updateService.Active
+		return updateService.VersionManager.GetActive()
 	})
 	go updateLoop(updateService)
 	select {}
