@@ -23,13 +23,17 @@ type GitHubClientInterface interface {
 	FetchLatestRelease() (*models.GitHubRelease, *semver.Version, error)
 }
 
-func NewGitHubClient(config *config.Config) GitHubClientInterface {
+func NewGithubClientWithClient(config *config.Config, httpClient *http.Client) GitHubClientInterface {
 	return &GitHubClient{
-		httpClient:   &http.Client{},
+		httpClient:   httpClient,
 		githubApiUrl: config.GithubAPIURL,
 		repoOwner:    config.RepoOwner,
 		repoName:     config.RepoName,
 	}
+}
+
+func NewGitHubClient(config *config.Config) GitHubClientInterface {
+	return NewGithubClientWithClient(config, &http.Client{})
 }
 
 func (c *GitHubClient) FetchLatestRelease() (*models.GitHubRelease, *semver.Version, error) {

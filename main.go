@@ -27,7 +27,6 @@ func main() {
 
 	updateService := service.NewUpdateService(config, clients.NewGitHubClient(config), &mux)
 
-	// Pass a function that gets the current active instance
 	go startReverseProxy(config.ProxyPort, func() *models.BinaryInstance {
 		return updateService.VersionManager.GetActive()
 	})
