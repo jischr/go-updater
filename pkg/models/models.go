@@ -27,6 +27,15 @@ func (r *GitHubRelease) GetAssetURL(os, arch string) string {
 	return ""
 }
 
+func (r *GitHubRelease) CleanedVersion() (*semver.Version, error) {
+	tag := strings.TrimPrefix(r.TagName, "v")
+	newVersion, err := semver.NewVersion(tag)
+	if err != nil {
+		return nil, err
+	}
+	return newVersion, nil
+}
+
 type BinaryInstance struct {
 	Version *semver.Version
 	Port    int

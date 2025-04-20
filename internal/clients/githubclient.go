@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"strings"
 
 	"updater/internal/config"
 	"updater/pkg/models"
@@ -38,7 +37,7 @@ func NewGitHubClient(config *config.Config) GitHubClientInterface {
 
 func (c *GitHubClient) FetchLatestRelease() (*models.GitHubRelease, *semver.Version, error) {
 	url := fmt.Sprintf(c.githubApiUrl, c.repoOwner, c.repoName)
-	resp, err := http.Get(url)
+	resp, err := c.httpClient.Get(url)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -49,8 +48,7 @@ func (c *GitHubClient) FetchLatestRelease() (*models.GitHubRelease, *semver.Vers
 		return nil, nil, err
 	}
 
-	tag := strings.TrimPrefix(release.TagName, "v")
-	newVersion, err := semver.NewVersion(tag)
+	newVersion, err := release.CleanedVersion()
 	if err != nil {
 		return nil, nil, err
 	}
