@@ -2,7 +2,7 @@
 
 A production-quality solution to the problem of seamlessly updating deployed programs across client machines. This project demonstrates how to implement a self-updating mechanism that allows programs to automatically download and apply updates without service interruption.
 
-In this case, the go-update is running a simple server found here: https://github.com/jischr/simple-server
+In this implementation, the go-updater is running a simple server from https://github.com/jischr/simple-server. The simple-server publishes release binaries that the go-updater consumes.
 
 ## Problem Statement
 
@@ -44,6 +44,7 @@ The system consists of several components:
 
 2. Build the project:
    ```
+   go mod download
    go build -o go-updater
    ```
 
@@ -141,4 +142,4 @@ You can also specify
 3. **CRON**: Use a library for managing a cron job for the updates (rather than this sleep timer)
 4. **Forced Updates**: Allow admins to force an update check
 5. **Metrics and Monitoring**: Add Prometheus metrics for monitoring update status.
-6. **More Tests**: I only had time for happy path tests. I'd add negative tests.
+6. **More Tests**: Add negative tests. There was only time for happy path tests.
