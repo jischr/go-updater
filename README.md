@@ -75,7 +75,16 @@ You can also specify
 
 ## Flow Chart
 
-### Simple Overview
+### Flow Diagram
+![Flow Diagram](./images/flow_diagram.png)
+
+### Sequence Diagram
+
+[Source](https://mermaid.live/edit#pako:eNrNVMGO2jAQ_ZWRT60EFBOyEKtCgm2116pqc6i4eJMJsZrY1HboUsS_1042LCFB6rHOJbbfezPzxvaJJCpFwojBXxXKBD8JvtO83EpwY8-1FYnYc2nhsRAobX_9Kx5QG4QvWr0c-9sxcAOxQwglx9_3Kbeo-6i1RxlR7gscG9ROEQ50Mp1M-9DNHSjdygbcJDperbqpMXj6_A0-HJpUGmgHAAOUTMj0JtjHZ70CnlhxQBDSWO5Mu6e2Hgq6djs3YbakKZbcE2pq6gELpfbgwUeQkKtKm2bdj9jznoTNq2cGSY7JT8iUBom_QWOB3OAVuMHVoWLm9m2lJRSuV8a2aOgUUUfweAdPVOkadAEA33FvTGtSj8cLCyJr5VuWMLDTyC3YnMu73LqqDQPnu7Y3nXHcruYbrTbKrYrs6KkWQWW1FV2Fbj-v48XX3HfXTX3_BvZj03jSNIq2jfIDZdrVjZlBW2fReuDPljvdg6erZa198a6aTuYDUS4__9F92AwF3dy7D_Rf74MDkhHZaZESZnWFI1KiLrmfkpOX2BKbY4lb4hkpZrwqrBc_O5p7VH4oVbZMrapdTljGC-NmVf1gvb6Jl1XtvEX9qCppCQvm0aJWIexEXvw8mAQBnVI6ny2iMHSbR8IelpNoOl_SKJqHQRCGs_OI_KnD0gmdhbNgOV08BDQK3Hf-CztrxRI)
+
+![Sequence Diagram](./images/sequence_diagram.png)
+
+### Another View of Architecture
 
 ```
 ┌─────────────┐     ┌─────────────┐     ┌─────────────┐
@@ -96,43 +105,6 @@ You can also specify
 └─────────────┘     └─────────────┘     └─────────────┘
 ```
 
-### Proxy Request Flow
-
-```
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│             │     │             │     │             │
-│  Client     │────▶│  Reverse    │────▶│  Get Active │
-│  Request    │     │  Proxy      │     │  Version    │
-│             │     │             │     │             │
-└─────────────┘     └─────────────┘     └─────────────┘
-                                              │
-                                              ▼
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│             │     │             │     │             │
-│  No Active  │◀────│  Active     │◀────│  Forward    │
-│  Version    │     │  Version    │     │  Request to │
-│  Available  │     │  Found?     │     │  Active     │
-│  (Error)    │     │             │     │  Version    │
-│             │     │             │     │             │
-└─────────────┘     └─────────────┘     └─────────────┘
-        │                   │
-        │                   │ Yes
-        │                   ▼
-        │            ┌─────────────┐
-        │            │             │
-        │            │  Return     │
-        │            │  Response   │
-        │            │             │
-        │            └─────────────┘
-        │
-        ▼
-┌─────────────┐
-│             │
-│  Return     │
-│  503 Error  │
-│             │
-└─────────────┘
-```
 
 ## Possible Enhancements
 
